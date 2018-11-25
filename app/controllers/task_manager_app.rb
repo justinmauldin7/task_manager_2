@@ -29,7 +29,7 @@ class TaskManagerApp < Sinatra::Base
 
   get '/tasks/:id/edit' do
     @task = Task.find(params[:id])
-    erb :edit 
+    erb :edit
   end
 
   set :method_override, true
@@ -37,5 +37,10 @@ class TaskManagerApp < Sinatra::Base
   put '/tasks/:id' do |id|
     Task.update(id.to_i, params[:task])
     redirect "/tasks/#{id}"
+  end
+
+  delete '/tasks/:id' do |id|
+    Task.destroy(id.to_i)
+    redirect '/tasks'
   end
 end
